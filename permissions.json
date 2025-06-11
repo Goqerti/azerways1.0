@@ -1,0 +1,17 @@
+{
+  "sales_manager": {
+    "canEditOrder": true,
+    "canEditFinancials": true,
+    "canDeleteOrder": true
+  },
+  "reservation_role": {
+    "canEditOrder": true,
+    "canEditFinancials": true,
+    "canDeleteOrder": true
+  },
+  "i̇t": {
+    "canEditOrder": true,
+    "canEditFinancials": true,
+    "canDeleteOrder": true
+  }
+}

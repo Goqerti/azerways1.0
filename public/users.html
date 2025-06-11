@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>İstifadəçi İdarəetmə Paneli</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+<body>
+    <header>
+        <h1>İstifadəçi İdarəetmə Paneli</h1>
+        <nav>
+            <a href="/" class="logout-btn">Əsas Səhifə</a>
+        </nav>
+    </header>
+
+    <main>
+        <div id="usersView">
+            <h2>Bütün İstifadəçilər</h2>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Ad Soyad</th>
+                            <th>İstifadəçi Adı (login)</th>
+                            <th>Email</th>
+                            <th>Vəzifə (Rol)</th>
+                            <th>Əməliyyatlar</th>
+                        </tr>
+                    </thead>
+                    <tbody id="usersTableBody">
+                        </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <div id="editUserModal" class="modal">
+        <div class="modal-content" style="max-width: 500px;">
+            <span class="close-button">&times;</span>
+            <h3>İstifadəçiyə Düzəliş Et</h3>
+            <form id="editUserForm">
+                <input type="hidden" id="editUsernameHidden">
+                
+                <label for="editDisplayName">Ad Soyad:</label>
+                <input type="text" id="editDisplayName" required>
+                
+                <label for="editEmail">E-poçt:</label>
+                <input type="email" id="editEmail" required>
+
+                <label for="editRole">Vəzifə (Rol):</label>
+                <input type="text" id="editRole" required>
+
+                <label for="editNewPassword">Yeni Şifrə (dəyişdirmək istəmirsinizsə boş buraxın):</label>
+                <input type="password" id="editNewPassword" placeholder="Ən az 6 simvol">
+
+                <button type="submit">Yadda Saxla</button>
+            </form>
+        </div>
+    </div>
+    
+    <script src="users.js"></script>
+</body>
+</html>

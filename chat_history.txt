@@ -1,0 +1,8 @@
+{"id":"03e41e06-505e-4b0a-92c7-d4415c77596f","sender":"İlkin","role":"sales_manager","text":"ss","timestamp":"2025-06-08T17:19:50.286Z"}
+{"id":"4430012d-d0ad-41b5-aa55-66b1dda0e558","sender":"İlkin","role":"sales_manager","text":"sssss","timestamp":"2025-06-08T17:19:53.773Z"}
+{"id":"cfb0c1ad-a8b0-45f5-88d8-48fd46f21923","sender":"Səid","role":"owner","text":"ssss","timestamp":"2025-06-08T17:20:13.853Z"}
+{"id":"9a374700-b80a-488c-8faf-9255d9315686","sender":"Səid","role":"owner","text":"ddd","timestamp":"2025-06-08T23:10:16.472Z"}
+{"id":"578e3f0a-ecb1-4575-b628-77203d72b27d","sender":"İlkin","role":"sales_manager","text":"sa","timestamp":"2025-06-09T01:26:10.102Z"}
+{"id":"32912a80-f1ea-4752-a284-8ec22ddccbb9","sender":"Şirvan","role":"i̇t","text":"ssss","timestamp":"2025-06-09T12:55:47.121Z"}
+{"id":"55cdb8ba-f373-421f-935d-2afc2ab9cf34","sender":"Səid","role":"owner","text":"safhsfhs","timestamp":"2025-06-09T18:59:19.530Z"}
+{"id":"186ca1f4-f592-49be-af31-58e7fddc99d9","sender":"ilkin","role":"sales_manager","text":"aaaaaa","timestamp":"2025-06-10T12:58:27.405Z"}

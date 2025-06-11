@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n-key="loginTitle">Azərweys admin panel</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+<body class="login-page-body">
+    <div class="language-switcher login-lang-switcher" id="lang-switcher-login">
+        <div class="selected-lang">
+            <span id="selected-lang-text">Azərbaycanca</span>
+            <i class="fas fa-chevron-down"></i>
+        </div>
+        <ul class="lang-options">
+            <li data-lang="az"><span>Azərbaycanca</span></li>
+            <li data-lang="en"><span>English</span></li>
+            <li data-lang="ru"><span>Русский</span></li>
+        </ul>
+    </div>
+
+    <div class="login-container">
+        <div class="mascot-login-container">
+            <!-- YENİ ƏLAVƏ EDİLMİŞ BALON -->
+            <div class="login-mascot-bubble" id="loginMascotBubble">
+                Salam! Mən Veys çoxdandır burda sıxılırdım<br>Başlayaq inşALLAH? 🥳
+            </div>
+            <img src="mascot.png" alt="Mascot Greeting" id="loginMascot">
+        </div>
+
+        <h1 data-i18n-key="loginTitle">Azərweys admin panel</h1>
+        <form action="/login" method="POST">
+            <div class="input-group">
+                <label for="username" data-i18n-key="usernameLabel">İstifadəçi adı:</label>
+                <input type="text" id="username" name="username" required autocomplete="username">
+            </div>
+            <div class="input-group">
+                <label for="password" data-i18n-key="passwordLabel">Şifrə:</label>
+                <div class="password-wrapper">
+                    <input type="password" id="password" name="password" required autocomplete="current-password">
+                </div>
+            </div>
+            <div class="input-group-checkbox">
+                <input type="checkbox" id="showPasswordToggle">
+                <label for="showPasswordToggle">Şifrəni göstər</label>
+            </div>
+            <button type="submit" data-i18n-key="loginButton">Daxil Ol</button>
+        </form>
+        <div id="errorMessageContainer"></div>
+        <a href="/permissions.html" class="permissions-link" data-i18n-key="permissionsLink">İcazələri İdarə Et</a>
+        <a href="/forgot-password.html" class="permissions-link" data-i18n-key="forgotPasswordLink">Şifrəni unutdum?</a>
+        <a href="#" id="showCreateUserModalBtn" class="permissions-link" data-i18n-key="createUserLink">Yeni İstifadəçi Yarat</a>
+    </div>
+
+    <div id="createUserModal" class="modal" style="display: none;">
+        <div class="modal-content" style="max-width: 500px;">
+            <span class="close-button">&times;</span>
+            <div id="step1-owner-verify">
+                <h3>Owner Təsdiqi</h3>
+                <p>Yeni istifadəçi yaratmaq üçün Owner parolunu daxil edin.</p>
+                <form id="ownerVerifyForm">
+                    <label for="modalOwnerPassword">Owner Parolu:</label>
+                    <input type="password" id="modalOwnerPassword" required>
+                    <button type="submit">Təsdiq Et</button>
+                </form>
+                <div id="modalErrorMessage"></div>
+            </div>
+            <div id="step2-registration-form" style="display: none;">
+                <h3>Yeni İstifadəçi Qeydiyyatı</h3>
+                <form id="registrationForm">
+                    <label>Ad və Soyad:</label>
+                    <input type="text" id="regDisplayName" required>
+                    <label>İstifadəçi Adı (login):</label>
+                    <input type="text" id="regUsername" required>
+                    <label>E-poçt:</label>
+                    <input type="email" id="regEmail" required>
+                    <label>Şifrə:</label>
+                    <input type="password" id="regPassword" required>
+                    <label>Vəzifə (Rol):</label>
+                    <select id="regRole" required>
+                        <option value="" disabled selected>Vəzifə seçin</option>
+                        <option value="sales_manager">Sales Manager</option>
+                        <option value="coordinator">Coordinator</option>
+                        <option value="finance">Finance</option>
+                        <option value="director">Director</option>
+                        <option value="new_role">-- Yeni Vəzifə Əlavə Et --</option>
+                    </select>
+                    <input type="text" id="regNewRole" placeholder="Yeni vəzifənin adını yazın (məs: custom_role)" style="display: none; margin-top: 10px;">
+                    <button type="submit">İstifadəçini Yarat</button>
+                </form>
+                <div id="regMessage"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="i18n.js"></script>
+    <script src="login-features.js"></script> 
+</body>
+</html>

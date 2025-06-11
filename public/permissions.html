@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>İcazələrin İdarə Edilməsi</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body { display: flex; justify-content: center; align-items: center; min-height: 100vh; background-color: #eef2f7; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        .container { background-color: #fff; padding: 30px 40px; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); width: 100%; max-width: 600px; }
+        h2 { text-align: center; color: #334e68; border-bottom: 2px solid #007bff; padding-bottom: 10px; margin-bottom: 25px; }
+        .password-prompt label, .permissions-table label { display: block; margin-bottom: 8px; font-weight: 500; }
+        .password-prompt input { width: calc(100% - 24px); padding: 12px; border: 1px solid #ccc; border-radius: 5px; }
+        .password-prompt button { display: block; width: 100%; padding: 12px; margin-top: 20px; background-color: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 1.1em; }
+        .permissions-table table { width: 100%; border-collapse: collapse; }
+        .permissions-table th, .permissions-table td { padding: 12px; border: 1px solid #ddd; text-align: left; }
+        .permissions-table th { background-color: #f0f2f5; }
+        .permissions-table td { text-align: center; }
+        .permissions-table input[type="checkbox"] { transform: scale(1.5); }
+        #savePermissionsBtn { display: block; width: 100%; padding: 12px; margin-top: 20px; background-color: #28a745; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 1.1em; }
+        .message { padding: 10px; margin-top: 15px; border-radius: 5px; text-align: center; }
+        .message.error { background-color: #f8d7da; color: #721c24; }
+        .message.success { background-color: #d4edda; color: #155724; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>İcazələrin İdarə Paneli</h2>
+        
+        <!-- Addım 1: Parol Yoxlaması -->
+        <div id="passwordPrompt">
+            <div class="password-prompt">
+                <label for="ownerPassword">Davam etmək üçün "Owner" parolunu daxil edin:</label>
+                <input type="password" id="ownerPassword" required>
+                <button id="verifyOwnerBtn">Daxil Ol</button>
+            </div>
+        </div>
+
+        <!-- Addım 2: İcazə Cədvəli (gizlidir) -->
+        <div id="permissionsPanel" style="display: none;">
+            <div class="permissions-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Rol</th>
+                            <th>Düzəliş Etmək</th>
+                            <th>Maliyyəni Dəyişmək</th>
+                            <th>Silmək</th>
+                        </tr>
+                    </thead>
+                    <tbody id="permissionsTableBody">
+                        <!-- İcazələr bura dinamik olaraq yüklənəcək -->
+                    </tbody>
+                </table>
+            </div>
+            <button id="savePermissionsBtn">Dəyişiklikləri Yadda Saxla</button>
+        </div>
+        
+        <div id="messageContainer"></div>
+
+    </div>
+
+    <script src="permissions.js"></script>
+</body>
+</html>

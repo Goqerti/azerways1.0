@@ -848,3 +848,151 @@ td .action-btn:hover { background-color: #e5e7eb; color: var(--text-primary); }
     transition: opacity 0.3s, transform 0.3s;
     pointer-events: none;
 }
+/* --- YENİ: FOOTER STİLLƏRİ --- */
+.site-footer {
+    text-align: center;
+    padding: 20px;
+    margin-top: 30px;
+    border-top: 1px solid var(--border-color);
+    background-color: var(--surface-color);
+}
+
+.site-footer p {
+    margin: 0;
+    font-size: 0.9em;
+    color: var(--text-secondary);
+}
+
+.site-footer a {
+    color: var(--primary-action-color);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.site-footer a:hover {
+    text-decoration: underline;
+}
+/* ============================================== */
+/* --- RESPONSİVLİK (ADAPTİVLİK) QAYDALARI --- */
+/* ============================================== */
+
+.mobile-menu-toggle-btn {
+    display: none; /* İlkin olaraq gizlidir */
+    background: none;
+    border: none;
+    font-size: 1.5em;
+    color: var(--text-primary);
+    cursor: pointer;
+}
+
+/* --- Planşet və Kiçik Ekranlar (1024px-ə qədər) --- */
+@media (max-width: 1024px) {
+    header {
+        flex-wrap: wrap;
+    }
+    .nav-container {
+        display: none;
+        width: 100%;
+        order: 3;
+        margin-top: 15px;
+        background-color: var(--surface-color);
+    }
+    .nav-container.mobile-active {
+        display: block;
+    }
+    header nav {
+        flex-direction: column;
+        align-items: stretch;
+        width: 100%;
+    }
+    header nav button, header nav a {
+        width: 100%;
+        text-align: left;
+        padding: 12px 16px;
+        border-radius: 0;
+        border-bottom: 1px solid var(--border-color);
+    }
+    header nav .lang-switcher-container-header {
+        width: auto;
+        padding: 10px 16px;
+    }
+    .mobile-menu-toggle-btn {
+        display: block;
+    }
+    .filters-container {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .currency-cards-container {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    }
+}
+
+/* --- Mobil Telefonlar (768px-ə qədər) --- */
+@media (max-width: 768px) {
+    main {
+        padding: 15px;
+    }
+    main h2 {
+        font-size: 1.5em;
+    }
+    .modal-content {
+        width: 95%;
+        margin: 5% auto;
+        padding: 20px;
+    }
+    .form-group-inline {
+        flex-direction: column;
+        gap: 12px;
+        align-items: stretch;
+    }
+
+    /* ƏN VACİB HİSSƏ: CƏDVƏLİN RESPONSİVLİYİ */
+    .table-container table, 
+    .table-container thead, 
+    .table-container tbody, 
+    .table-container th, 
+    .table-container td, 
+    .table-container tr {
+        display: block;
+    }
+    
+    .table-container thead tr {
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
+    }
+    
+    .table-container tr {
+        border: 1px solid var(--border-color);
+        margin-bottom: 15px;
+        border-radius: var(--border-radius);
+        overflow: hidden;
+    }
+    
+    .table-container td {
+        border: none;
+        border-bottom: 1px solid #eee;
+        position: relative;
+        padding-left: 50%;
+        text-align: right;
+        white-space: normal;
+    }
+    
+    .table-container td:before {
+        position: absolute;
+        top: 12px;
+        left: 12px;
+        width: 45%;
+        padding-right: 10px;
+        white-space: nowrap;
+        text-align: left;
+        font-weight: 600;
+        color: var(--text-primary);
+        content: attr(data-label);
+    }
+
+    td .action-btn {
+        margin: 2px;
+    }
+}

@@ -1,3 +1,4 @@
+// public/permissions.js (YEKUN VƏ TAM İŞLƏK VERSİYA)
 document.addEventListener('DOMContentLoaded', () => {
     const passwordPrompt = document.getElementById('passwordPrompt');
     const permissionsPanel = document.getElementById('permissionsPanel');
@@ -7,41 +8,29 @@ document.addEventListener('DOMContentLoaded', () => {
     const savePermissionsBtn = document.getElementById('savePermissionsBtn');
     const messageContainer = document.getElementById('messageContainer');
 
-    let ownerVerified = false;
-
     const showMessage = (text, type = 'error') => {
         messageContainer.innerHTML = `<div class="message ${type}">${text}</div>`;
-        setTimeout(() => messageContainer.innerHTML = '', 3000);
+        setTimeout(() => messageContainer.innerHTML = '', 4000);
     };
 
-    const fetchAndRenderPermissions = async () => {
-        try {
-            const response = await fetch('/api/permissions');
-            if (!response.ok) throw new Error('İcazələri yükləmək mümkün olmadı.');
-            
-            const permissions = await response.json();
-            permissionsTableBody.innerHTML = '';
-            
-            const roleNames = {
-                sales_manager: 'Sales Manager',
-                coordinator: 'Coordinator',
-                reservation: 'Reservation',
-                finance: 'Finance'
-            };
+    const renderPermissionsTable = (permissions) => {
+        permissionsTableBody.innerHTML = '';
+        const roleNames = {
+            sales_manager: 'Sales Manager',
+            reservation_role: 'Reservation',
+            'i̇t': 'IT',
+            finance: 'Finance'
+        };
 
-            for (const role in permissions) {
-                const perms = permissions[role];
-                const row = permissionsTableBody.insertRow();
-                row.dataset.role = role;
-                
-                row.insertCell().textContent = roleNames[role] || role;
-                row.insertCell().innerHTML = `<input type="checkbox" class="perm-checkbox" data-permission="canEditOrder" ${perms.canEditOrder ? 'checked' : ''}>`;
-                row.insertCell().innerHTML = `<input type="checkbox" class="perm-checkbox" data-permission="canEditFinancials" ${perms.canEditFinancials ? 'checked' : ''}>`;
-                row.insertCell().innerHTML = `<input type="checkbox" class="perm-checkbox" data-permission="canDeleteOrder" ${perms.canDeleteOrder ? 'checked' : ''}>`;
-            }
-
-        } catch (error) {
-            showMessage(error.message);
+        for (const role in permissions) {
+            if (role === 'owner') continue;
+            const perms = permissions[role];
+            const row = permissionsTableBody.insertRow();
+            row.dataset.role = role;
+            row.insertCell().textContent = roleNames[role] || role;
+            row.insertCell().innerHTML = `<input type="checkbox" class="perm-checkbox" data-permission="canEditOrder" ${perms.canEditOrder ? 'checked' : ''}>`;
+            row.insertCell().innerHTML = `<input type="checkbox" class="perm-checkbox" data-permission="canEditFinancials" ${perms.canEditFinancials ? 'checked' : ''}>`;
+            row.insertCell().innerHTML = `<input type="checkbox" class="perm-checkbox" data-permission="canDeleteOrder" ${perms.canDeleteOrder ? 'checked' : ''}>`;
         }
     };
 
@@ -51,30 +40,33 @@ document.addEventListener('DOMContentLoaded', () => {
             showMessage('Zəhmət olmasa, parolu daxil edin.');
             return;
         }
+
         try {
-            const response = await fetch('/api/verify-owner', {
+            const response = await fetch('/api/permissions/get-by-password', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ password })
             });
 
+            const data = await response.json();
+
             if (response.ok) {
-                ownerVerified = true;
                 passwordPrompt.style.display = 'none';
                 permissionsPanel.style.display = 'block';
-                await fetchAndRenderPermissions();
+                renderPermissionsTable(data);
             } else {
-                const error = await response.json();
-                showMessage(error.message || 'Parol yanlışdır.');
+                throw new Error(data.message || 'Naməlum xəta baş verdi.');
             }
         } catch (error) {
-            showMessage('Yoxlama zamanı xəta baş verdi.');
+            console.error('İcazələri alarkən xəta:', error);
+            showMessage(error.message);
         }
     });
 
     savePermissionsBtn.addEventListener('click', async () => {
-        if (!ownerVerified) {
-            showMessage('Yoxlama keçməmisiniz.');
+        const password = ownerPasswordInput.value;
+        if (!password) {
+            showMessage('Təhlükəsizlik üçün Owner parolu boş ola bilməz. Zəhmət olmasa, səhifəni yeniləyib yenidən daxil olun.');
             return;
         }
 
@@ -92,20 +84,25 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         try {
-            const response = await fetch('/api/permissions', {
+            const response = await fetch('/api/permissions/save-by-password', {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(newPermissions)
+                body: JSON.stringify({ 
+                    password: password, 
+                    permissions: newPermissions 
+                })
             });
+            
+            const result = await response.json();
 
             if (response.ok) {
                 showMessage('İcazələr uğurla yadda saxlandı.', 'success');
             } else {
-                const error = await response.json();
-                showMessage(error.message || 'Yadda saxlama zamanı xəta.');
+                throw new Error(result.message || 'Yadda saxlama zamanı xəta.');
             }
         } catch (error) {
-            showMessage('Yadda saxlama zamanı xəta baş verdi.');
+            console.error('İcazələri yadda saxlayarkən xəta:', error);
+            showMessage(error.message);
         }
     });
 });
